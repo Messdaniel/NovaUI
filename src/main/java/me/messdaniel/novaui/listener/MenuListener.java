@@ -15,13 +15,13 @@ public class MenuListener implements Listener {
         if (!(event.getInventory().getHolder() instanceof BaseMenu menu)) return;
         if (event.getClickedInventory() == null) return;
 
-        final Set<MenuAction<InventoryClickEvent>> invClickActions = menu.getInventoryClickAction();
-        if (invClickActions != null && event.getClickedInventory().getType() == InventoryType.PLAYER) {
-            invClickActions.forEach(action -> action.execute(event));
+        final Set<MenuAction<InventoryClickEvent>> clickActions = menu.getClickActions();
+        if (clickActions != null) {
+            clickActions.forEach(action -> action.execute(event));
         }
 
         final MenuAction<InventoryClickEvent> slotClickActions = menu.getSlotAction(event.getSlot());
-        if (slotClickActions != null && event.getClickedInventory().getType() != InventoryType.PLAYER) {
+        if (slotClickActions != null) {
             slotClickActions.execute(event);
         }
     }
@@ -30,7 +30,7 @@ public class MenuListener implements Listener {
     public void onMenuDrag(InventoryDragEvent event) {
         if (!(event.getInventory().getHolder() instanceof BaseMenu menu)) return;
 
-        final Set<MenuAction<InventoryDragEvent>> actions = menu.getDragAction();
+        final Set<MenuAction<InventoryDragEvent>> actions = menu.getDragActions();
         if (actions == null || actions.isEmpty()) return;
 
         actions.forEach(action -> action.execute(event));
@@ -40,7 +40,7 @@ public class MenuListener implements Listener {
     public void onMenuClose(InventoryCloseEvent event) {
         if (!(event.getInventory().getHolder() instanceof BaseMenu menu)) return;
 
-        final Set<MenuAction<InventoryCloseEvent>> actions = menu.getCloseMenuAction();
+        final Set<MenuAction<InventoryCloseEvent>> actions = menu.getCloseMenuActions();
         if (actions == null || actions.isEmpty() || menu.isUpdating() || !menu.shouldRunCloseAction()) return;
 
         actions.forEach(action -> action.execute(event));
@@ -50,7 +50,7 @@ public class MenuListener implements Listener {
     public void onMenuOpen(InventoryOpenEvent event) {
         if (!(event.getInventory().getHolder() instanceof BaseMenu menu)) return;
 
-        final Set<MenuAction<InventoryOpenEvent>> actions = menu.getOpenMenuAction();
+        final Set<MenuAction<InventoryOpenEvent>> actions = menu.getOpenMenuActions();
         if (actions == null || actions.isEmpty() || menu.isUpdating() || !menu.shouldRunOpenAction()) return;
 
         actions.forEach(action -> action.execute(event));

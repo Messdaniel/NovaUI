@@ -38,11 +38,11 @@ public class BaseMenu implements InventoryHolder {
     private final Map<Integer, ItemStack> invItems;
     private boolean updating = false;
 
-    private Map<Integer, MenuAction<InventoryClickEvent>> slotClickAction;
-    private Set<MenuAction<InventoryClickEvent>> inventoryClickAction;
-    private Set<MenuAction<InventoryDragEvent>> dragAction;
-    private Set<MenuAction<InventoryCloseEvent>> closeMenuAction;
-    private Set<MenuAction<InventoryOpenEvent>> openMenuAction;
+    private Map<Integer, MenuAction<InventoryClickEvent>> slotClickActions;
+    private Set<MenuAction<InventoryClickEvent>> clickActions;
+    private Set<MenuAction<InventoryDragEvent>> dragActions;
+    private Set<MenuAction<InventoryCloseEvent>> closeMenuActions;
+    private Set<MenuAction<InventoryOpenEvent>> openMenuActions;
 
     private boolean runCloseAction = true;
     private boolean runOpenAction = true;
@@ -53,11 +53,11 @@ public class BaseMenu implements InventoryHolder {
         int inventorySize = rows * 9;
         this.inventory = Bukkit.createInventory(this, inventorySize, title);
         invItems = new LinkedHashMap<>(inventorySize);
-        slotClickAction = new LinkedHashMap<>(inventorySize);
-        inventoryClickAction = new HashSet<>(inventorySize);
-        dragAction = new HashSet<>(inventorySize);
-        closeMenuAction = new HashSet<>(inventorySize);
-        openMenuAction = new HashSet<>(inventorySize);
+        slotClickActions = new LinkedHashMap<>(inventorySize);
+        clickActions = new HashSet<>(inventorySize);
+        dragActions = new HashSet<>(inventorySize);
+        closeMenuActions = new HashSet<>(inventorySize);
+        openMenuActions = new HashSet<>(inventorySize);
     }
 
     public BaseMenu(Component title, MenuType type) {
@@ -66,11 +66,11 @@ public class BaseMenu implements InventoryHolder {
         int inventorySize = type.getMaxSize();
         this.inventory = Bukkit.createInventory(this, type.getInventoryType(), title);
         invItems = new LinkedHashMap<>(inventorySize);
-        slotClickAction = new LinkedHashMap<>(inventorySize);
-        inventoryClickAction = new HashSet<>(inventorySize);
-        dragAction = new HashSet<>(inventorySize);
-        closeMenuAction = new HashSet<>(inventorySize);
-        openMenuAction = new HashSet<>(inventorySize);
+        slotClickActions = new LinkedHashMap<>(inventorySize);
+        clickActions = new HashSet<>(inventorySize);
+        dragActions = new HashSet<>(inventorySize);
+        closeMenuActions = new HashSet<>(inventorySize);
+        openMenuActions = new HashSet<>(inventorySize);
     }
 
     public Component title() {
@@ -201,47 +201,47 @@ public class BaseMenu implements InventoryHolder {
 
     @Nullable
     public MenuAction<InventoryClickEvent> getSlotAction(final int slot) {
-        return slotClickAction.get(slot);
+        return slotClickActions.get(slot);
     }
 
     public void addSlotAction(final int slot,@Nullable final MenuAction<@NotNull InventoryClickEvent> slotClickAction) {
-        this.slotClickAction.put(slot, slotClickAction);
+        this.slotClickActions.put(slot, slotClickAction);
     }
 
     @Nullable
-    public Set<MenuAction<InventoryClickEvent>> getInventoryClickAction() {
-        return inventoryClickAction;
+    public Set<MenuAction<InventoryClickEvent>> getClickActions() {
+        return clickActions;
     }
 
-    public void addInventoryAction(@Nullable final MenuAction<@NotNull InventoryClickEvent> inventoryClickAction) {
-        this.inventoryClickAction.add(inventoryClickAction);
+    public void addClickAction(@Nullable final MenuAction<@NotNull InventoryClickEvent> clickAction) {
+        this.clickActions.add(clickAction);
     }
 
     @Nullable
-    public Set<MenuAction<InventoryDragEvent>> getDragAction() {
-        return dragAction;
+    public Set<MenuAction<InventoryDragEvent>> getDragActions() {
+        return dragActions;
     }
 
     public void addDragAction(@Nullable final MenuAction<@NotNull InventoryDragEvent> dragAction) {
-        this.dragAction.add(dragAction);
+        this.dragActions.add(dragAction);
     }
 
     @Nullable
-    public Set<MenuAction<InventoryCloseEvent>> getCloseMenuAction() {
-        return closeMenuAction;
+    public Set<MenuAction<InventoryCloseEvent>> getCloseMenuActions() {
+        return closeMenuActions;
     }
 
     public void addCloseMenuAction(@Nullable final MenuAction<@NotNull InventoryCloseEvent> closeGuiAction) {
-        this.closeMenuAction.add(closeGuiAction);
+        this.closeMenuActions.add(closeGuiAction);
     }
 
     @Nullable
-    public Set<MenuAction<InventoryOpenEvent>> getOpenMenuAction() {
-        return openMenuAction;
+    public Set<MenuAction<InventoryOpenEvent>> getOpenMenuActions() {
+        return openMenuActions;
     }
 
     public void addOpenAction(@Nullable final MenuAction<@NotNull InventoryOpenEvent> openGuiAction) {
-        this.openMenuAction.add(openGuiAction);
+        this.openMenuActions.add(openGuiAction);
     }
 
     public boolean shouldRunCloseAction() {
