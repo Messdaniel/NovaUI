@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class BaseMenu implements InventoryHolder {
+public abstract class BaseMenu implements InventoryHolder {
 
     private static final Plugin plugin = NovaUI.getPlugin();
 

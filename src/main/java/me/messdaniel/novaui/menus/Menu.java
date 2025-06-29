@@ -1,8 +1,10 @@
 package me.messdaniel.novaui.menus;
 
+import me.messdaniel.novaui.builders.menu.PaginatedMenuBuilder;
 import me.messdaniel.novaui.menutypes.MenuType;
-import me.messdaniel.novaui.menubuilders.MenuBuilder;
+import me.messdaniel.novaui.builders.menu.MenuBuilder;
 import net.kyori.adventure.text.Component;
+import org.jetbrains.annotations.NotNull;
 
 public class Menu extends BaseMenu {
 
@@ -22,7 +24,13 @@ public class Menu extends BaseMenu {
         this.type = type;
     }
 
+    @NotNull
     public static MenuBuilder menu() {
         return new MenuBuilder();
+    }
+
+    @NotNull
+    public static PaginatedMenuBuilder paginated() {
+        return new PaginatedMenuBuilder();
     }
 }

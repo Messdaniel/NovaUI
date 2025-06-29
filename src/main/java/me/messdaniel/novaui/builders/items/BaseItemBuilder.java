@@ -1,4 +1,4 @@
-package me.messdaniel.novaui.itembuilder;
+package me.messdaniel.novaui.builders.items;
 
 import me.messdaniel.novaui.utils.VersionHelper;
 import net.kyori.adventure.text.Component;
