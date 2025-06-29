@@ -9,7 +9,7 @@ public class BaseMenuBuilder<B extends BaseMenuBuilder<B>> {
 
     private Component title;
     private int rows = 1;
-    private MenuType type;
+    private MenuType type = MenuType.CHEST;
 
     public Component title() {
         return title;
